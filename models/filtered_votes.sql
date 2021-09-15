@@ -5,7 +5,11 @@
 }}
 
 select * from {{ source('stackoverflow', 'votes') }}
-where post_id in (select id from {{ ref('selected_questions') }} )
+where (
+    post_id in (select id from {{ ref('filtered_questions') }} )
+    or post_id in (select id from {{ ref('filtered_answers') }} )
+)
+
 
 -- to keep things from getting out of hand!
 and creation_date > '2021-01-01'

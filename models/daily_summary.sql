@@ -8,28 +8,28 @@ with questions as (
     select
         DATE_TRUNC(DATE(creation_date), DAY) AS `date`,
         count(*) as num_questions
-    from {{ ref('selected_questions') }}
+    from {{ ref('filtered_questions') }}
     group by `date`
 ),
 answers as (
     select
         DATE_TRUNC(DATE(creation_date), DAY) AS `date`,
         count(*) as num_answers
-    from {{ ref('selected_answers') }}
+    from {{ ref('filtered_answers') }}
     group by `date`
 ),
 askers as (
     select
         DATE_TRUNC(DATE(creation_date), DAY) AS `date`,
         count(distinct(owner_user_id)) as num_askers
-    from {{ ref('selected_questions') }}
+    from {{ ref('filtered_questions') }}
     group by `date`
 ),
 answerers as (
     select
         DATE_TRUNC(DATE(creation_date), DAY) AS `date`,
         count(distinct(owner_user_id)) as num_answerers
-    from {{ ref('selected_answers') }}
+    from {{ ref('filtered_answers') }}
     group by `date`
 )
 
