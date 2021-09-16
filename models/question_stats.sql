@@ -10,7 +10,6 @@ select
     owner_user_id,
     accepted_answer_id,
     answer_count,
-    comment_count,
 
     (
         select count(*)
@@ -25,5 +24,5 @@ select
         where post_id = filtered_questions.id
         and vote_type_id = 3
     ) as downvote_count
-    
+
 from {{ ref('filtered_questions') }}
