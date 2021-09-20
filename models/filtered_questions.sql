@@ -5,7 +5,7 @@
 }}
 
 select * from {{ source('stackoverflow', 'posts_questions') }}
-where tags like '%bigquery%'
+where tags like '%etl%'
 
 -- to keep things from getting out of hand!
 and creation_date > '2021-01-01'
